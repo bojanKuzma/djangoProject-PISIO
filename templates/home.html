@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Django App</title>
-</head>
-<body>
-    <div>
-        {% lorem 3 p %}
-    </div>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block nav_bar %}
+    <nav>
+        <a href="{% url 'base' %}">Base</a>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <p>Ovo je druga stranica i bice nas homepage za forum</p>
+{% endblock %}

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Django App</title>
+</head>
+<body>
+{% block nav_bar %}
+    <a href="{% url 'home' %}">Home</a>
+{% endblock %}
+
+{% block content %}
+    <p>Stranica gdje cemo postavit login formu i link za stranicu sa registracijom</p>
+{% endblock %}
+</body>
+</html>

@@ -16,9 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from forum.views import Home
+from forum.views import Home, Base
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', Home.as_view()),
+    path('', Base.as_view(), name='base'),
+    path('home', Home.as_view(), name='home'),
 ]
