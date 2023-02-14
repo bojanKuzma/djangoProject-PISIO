@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+    <main class="form-signin w-50 m-auto pb-5">
+        {% if form.errors %} {# Ukoliko se desi neka greska u smislu neuspjesan login #}
+            <div class="alert alert-danger" role="alert">
+                Your username and password didn't match. Please try again.
+            </div>
+        {% endif %}
+        {% if next %}
+            {# Ovdje provjeramo ako koristi pokusao pristup nekoj stranici preko url a da izbjegne next onda imamo next #}
+            {% if user.is_authenticated %}
+                {# Ovdje provjeramo da li je korisnik autentifikovan ako jeste onda vjerovatno nema pristup toj stranici #}
+                <div class="alert alert-danger" role="alert">
+                    Your account doesn't have access to this page. To proceed,
+                    please login with an account that has access.
+                </div>
+            {% else %}
+                {# Ovdje pise poruka za korisnika koji nije autentifikovan #}
+                <div class="alert alert-danger" role="alert">
+                    Please login to see this page.
+                </div>
+            {% endif %}
+        {% endif %}
+
+        <form method="post" action="{% url 'login' %}"> {# putanja koju gadjamo kad korisnik submit-a formu #}
+            {% csrf_token %}
+            <div class="col-sm-12 text-center">
+                <img class="m-auto" style="display: inline-block" src="{% static 'django-logo.png' %}" alt="django"
+                     width="192" height="192">
+            </div>
+            <h1 class="h3 mb-3 fw-normal text-center">Please sign in</h1>
+            <div class="form-floating pb-1">
+                {{ form.username }}
+                <label for="floatingInput">Email address</label>
+            </div>
+            <div class="form-floating pb-1">
+                {{ form.password }}
+                <label for="floatingPassword">Password</label>
+            </div>
+            <div class="h-25 d-inline-block"></div>
+            <button class="w-100 btn btn-lg btn-primary" value="login" type="submit">Sign in</button>
+        </form>
+    </main>
+    <script type="text/javascript">
+        {# Dodvanje css na input polja iz forme #}
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById('id_username').setAttribute('class', 'form-control')
+            document.getElementById('id_password').setAttribute('class', 'form-control')
+        });
+    </script>
+{% endblock %}
