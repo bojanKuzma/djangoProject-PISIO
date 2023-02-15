@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-    <main class="form-signin w-50 m-auto pb-5">
+    <main class="w-50 m-auto pb-5 ">
         {% if form.errors %} {# Ukoliko se desi neka greska u smislu neuspjesan login #}
             <div class="alert alert-danger" role="alert">
                 Your username and password didn't match. Please try again.
@@ -24,7 +24,7 @@
             {% endif %}
         {% endif %}
 
-        <form method="post" action="{% url 'login' %}"> {# putanja koju gadjamo kad korisnik submit-a formu #}
+        <form method="post" class="w-50 mx-auto" action="{% url 'login' %}"> {# putanja koju gadjamo kad korisnik submit-a formu #}
             {% csrf_token %}
             <div class="col-sm-12 text-center">
                 <img class="m-auto" style="display: inline-block" src="{% static 'django-logo.png' %}" alt="django"
