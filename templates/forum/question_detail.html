@@ -1,0 +1,46 @@
+{% extends 'forum/home.html' %}
+
+{% block content %}
+
+    <div class="accordion w-75 mx-auto  mt-5" id="accordionPanelsStayOpenExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header " id="panelsStayOpen-headingOne">
+                <button class="accordion-button bg-dark text-white" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                        aria-controls="panelsStayOpen-collapseOne">
+                    <strong>Question: {{ question.title }}</strong>
+                </button>
+            </h2>
+            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+                 aria-labelledby="panelsStayOpen-headingOne">
+                <div class="accordion-body">
+                    <strong>{{ question.description|default_if_none:'No description' }}</strong> {{ question.time_asked }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="w-75 py-3 mx-auto">
+        {% for answer in answers %}
+            <div class="d-flex">
+                <div class="p-2">Anwser by {{ answer.author }}:</div>
+                <div class="p-2 w-75 h-auto overflow-x-scroll"><strong>{{ answer.answer }}</strong> {{ answer.time_answered }}</div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="w-50 mx-auto mb-auto">
+        <form method="post" action="{% url 'add_answer' question.id %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-primary" type="submit">Post</button>
+        </form>
+    </div>
+{% endblock %}
+
+{% block nav_bar_items %}
+    <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="{% url 'home' %}">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link"  aria-current="page" href="{% url 'my_questions' %}">My Questions</a>
+    </li>
+{% endblock %}
