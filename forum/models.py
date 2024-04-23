@@ -3,7 +3,7 @@ from django.db import models
 
 class Question(models.Model):
     title = models.CharField(max_length=128,)
-    description = models.TextField(max_length=384, null=True, blank=True)
+    description = models.TextField(max_length=384, null=True, blank=False)
     time_asked = models.DateTimeField(auto_now_add=True)
     original_poster = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE)
 

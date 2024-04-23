@@ -12,6 +12,8 @@ class QuestionForm(ModelForm):
         super(QuestionForm, self).__init__(*args, **kwargs)
         self.fields['title'].widget.attrs['class'] = 'form-control'
         self.fields['description'].widget.attrs['class'] = 'form-control'
+        self.fields['description'].required = False
+
 
     def save(self, commit=True):
         question = super(QuestionForm, self).save(commit=False)
